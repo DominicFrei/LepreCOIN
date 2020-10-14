@@ -4,15 +4,50 @@ using UnityEngine;
 
 public class LiftLeprechaun : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private enum MovementState
     {
-        
+        None,
+        Up,
+        Down
     }
 
-    // Update is called once per frame
-    void Update()
+    private Vector3 _startingPosition;
+    private MovementState _movementState = MovementState.None;
+    private float _maximumMovement = 2.0f;
+
+    private void Start()
     {
-        
+        _startingPosition = transform.position;
+    }
+
+    private void Update()
+    {
+        switch (_movementState)
+        {
+            case MovementState.Down:
+                transform.position += Vector3.down * Time.deltaTime;
+                if (transform.position.y <= _startingPosition.y - _maximumMovement)
+                {
+                    _movementState = MovementState.Up;
+                }
+                break;
+            case MovementState.Up:
+                transform.position += Vector3.up * Time.deltaTime;
+                if (transform.position.y >= _startingPosition.y)
+                {
+                    //_pileOfGold.GoldDelivered();
+                    _movementState = MovementState.None;
+                }
+                break;
+        }
+
+    }
+
+    private void OnMouseUpAsButton()
+    {
+        if (MovementState.None == _movementState)
+        {
+            _movementState = MovementState.Down;
+        }
     }
 }
