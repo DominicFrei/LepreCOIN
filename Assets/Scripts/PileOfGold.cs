@@ -12,7 +12,7 @@ public class PileOfGold : MonoBehaviour
         _text.text = "0";
     }
 
-    public void GoldDelivered(int amount)
+    public void Deliver(int amount)
     {
         _amount += amount;
         _text.text = _amount + "";

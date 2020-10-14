@@ -3,8 +3,8 @@
 public class Lift : MonoBehaviour
 {
     [SerializeField] private GameObject _goldCoin;
-    [SerializeField] private PileOfGold _rainbowPileOfGold;
-    [SerializeField] private PileOfGold _treePileOfGold;
+    [SerializeField] private PileOfGold _sourcePileOfGold;
+    [SerializeField] private PileOfGold _targetPileOfGold;
 
     private enum MovementState
     {
@@ -32,7 +32,7 @@ public class Lift : MonoBehaviour
                 if (transform.position.y <= _startingPosition.y - _maximumMovement)
                 {
                     _goldCoin.SetActive(true);
-                    _gold = _treePileOfGold.Gather();
+                    _gold = _sourcePileOfGold.Gather();
                     _movementState = MovementState.Up;
                 }
                 break;
@@ -41,7 +41,7 @@ public class Lift : MonoBehaviour
                 if (transform.position.y >= _startingPosition.y)
                 {
                     _goldCoin.SetActive(false);
-                    _rainbowPileOfGold.GoldDelivered(_gold);
+                    _targetPileOfGold.Deliver(_gold);
                     _gold = 0;
                     _movementState = MovementState.None;
                 }
@@ -52,6 +52,7 @@ public class Lift : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
+        Debug.Log("click");
         if (MovementState.None == _movementState)
         {
             _movementState = MovementState.Down;
