@@ -38,7 +38,7 @@ public class TreeLeprechaun : MonoBehaviour
                 if (transform.position.x <= _startingPosition.x)
                 {
                     _goldCoin.SetActive(false);
-                    _pileOfGold.GoldDelivered();
+                    _pileOfGold.GoldDelivered(1);
                     _movementState = MovementState.None;
                 }
                 break;

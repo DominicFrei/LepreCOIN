@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PileOfGold : MonoBehaviour
 {
@@ -15,9 +12,18 @@ public class PileOfGold : MonoBehaviour
         _text.text = "0";
     }
 
-    public void GoldDelivered()
+    public void GoldDelivered(int amount)
     {
-        _amount++;
+        _amount += amount;
         _text.text = _amount + "";
     }
+
+    public int Gather()
+    {
+        int gold = _amount;
+        _amount = 0;
+        _text.text = "0";
+        return gold;
+    }
+
 }
