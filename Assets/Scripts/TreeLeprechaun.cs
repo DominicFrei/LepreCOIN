@@ -43,7 +43,7 @@ public class TreeLeprechaun : MonoBehaviour
                 _goldCoin.SetActive(true);
                 if (_sourcePileOfGold) // This isn't checked above because it is valid to be null.
                 {
-                    _gold = _sourcePileOfGold.Gather();
+                    _gold += _sourcePileOfGold.Gather();
                 }
                 else
                 {
