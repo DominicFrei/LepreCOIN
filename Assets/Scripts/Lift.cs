@@ -12,11 +12,10 @@ public class Lift : MonoBehaviour
         Up,
         Down
     }
-
-    private Vector3 _startingPosition;
     private MovementState _movementState = MovementState.None;
-    private float _maximumMovement = 2.0f;
+    private Vector3 _startingPosition;
     private int _gold;
+    private float _maximumMovement = 2.0f;
 
     private void Start()
     {
@@ -25,6 +24,12 @@ public class Lift : MonoBehaviour
 
     private void Update()
     {
+        if (!_goldCoin || !_sourcePileOfGold || !_targetPileOfGold)
+        {
+            Debug.LogError("At least one GameObject is NULL.");
+            return;
+        }
+
         switch (_movementState)
         {
             case MovementState.Down:
@@ -52,7 +57,6 @@ public class Lift : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        Debug.Log("click");
         if (MovementState.None == _movementState)
         {
             _movementState = MovementState.Down;
